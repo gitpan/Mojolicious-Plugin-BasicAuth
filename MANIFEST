@@ -1,8 +1,10 @@
+ChangeLog
 LICENSE
 MANIFEST
 META.yml
 Makefile.PL
 README
+_dist.ini
 dist.ini
 lib/Mojolicious/Plugin/BasicAuth.pm
 t/auth.t

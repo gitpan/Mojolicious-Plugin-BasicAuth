@@ -26,7 +26,7 @@ my %WriteMakefileArgs = (
                                            },
                        'ABSTRACT' => 'Basic HTTP Auth Helper',
                        'EXE_FILES' => [],
-                       'VERSION' => '0.01',
+                       'VERSION' => '0.02',
                        'PREREQ_PM' => {
                                         'Mojo::ByteStream' => '0',
                                         'Mojolicious::Plugin' => '0'

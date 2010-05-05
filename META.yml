@@ -19,4 +19,4 @@ recommends: {}
 requires:
   Mojo::ByteStream: 0
   Mojolicious::Plugin: 0
-version: 0.01
+version: 0.02

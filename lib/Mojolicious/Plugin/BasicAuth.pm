@@ -81,9 +81,13 @@ __END__
 
 Mojolicious::Plugin::BasicAuth - Basic HTTP Auth Helper
 
-=head1 SYNOPSIS
+=head1 DESCRIPTION
 
-	## Simple usage ##
+L<Mojolicous::Plugin::BasicAuth> is a helper for basic http authentication.
+
+=head1 USAGE
+		
+=head2 Simple - Mojolicious
 
 	# Mojolicious
 	package MyApp;
@@ -103,8 +107,8 @@ Mojolicious::Plugin::BasicAuth - Basic HTTP Auth Helper
 		$self->render_text( 'authenticated' );
 	}
 
-	
-	# Mojolicious::Lite
+=head2 Simple - Mojolicious::Lite
+
 	plugin 'basic_auth'
 	
 	get '/' => sub {
@@ -116,6 +120,8 @@ Mojolicious::Plugin::BasicAuth - Basic HTTP Auth Helper
 		
 		$self->render_text( 'authenticated' );
 	}
+
+=head2 Simple - Hashref configuration
 
 	# or, for more wordy configuration:
 	get '/' => sub {
@@ -131,8 +137,7 @@ Mojolicious::Plugin::BasicAuth - Basic HTTP Auth Helper
 		$self->render_text( 'authenticated' );
 	}
 
-
-	## Advanced usage ##  Verify credentials within the controller with callback
+=head2 Advanced - Callback
 
 	get '/' => sub {
 		my $self = shift;
@@ -144,10 +149,6 @@ Mojolicious::Plugin::BasicAuth - Basic HTTP Auth Helper
 
 		$self->render_text( 'authenticated' );
 	};
-
-=head1 DESCRIPTION
-
-L<Mojolicous::Plugin::BasicAuth> is a helper for basic http authentication.
 
 =head1 METHODS
 
@@ -170,10 +171,10 @@ L<http://github.com/tempire/mojolicious-plugin-basicauth>
 
 =head1 VERSION
 
-0.01
+0.02
 
 =head1 AUTHOR
 
-Glen Hinkle L<glen@empireenterprises.com>
+Glen Hinkle tempire@cpan.org
 
 =cut
