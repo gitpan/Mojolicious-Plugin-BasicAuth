@@ -4,7 +4,7 @@ use strict;
 use warnings;
 use Mojo::ByteStream;
 
-our $VERSION = '0.01';
+our $VERSION = '0.03';
 
 use base 'Mojolicious::Plugin';
 
@@ -16,8 +16,7 @@ sub register {
 			my $self = shift;
 
 			# Sent Credentials
-			my $auth = $self->req->headers->authorization || '';
-			$auth =~ s/^Basic //;
+			my $auth = $self->req->url->to_abs->userinfo || '';
 
 			# Required credentials
 			my ($realm, $password, $username) = $plugin->_expected_auth( @_ );
@@ -28,31 +27,15 @@ sub register {
 				if ! $auth and ! $callback;
 
 			# Verification within callback
-			return $self->res->code(200)
-				if $callback and $callback->( $plugin->_supplied_auth( $auth ) );
-
-			# Verify supplied credentials
-			my $encoded = Mojo::ByteStream->
-				new( ($username||'') . ':' . $password )->
-				b64_encode->
-				to_string;
-			chop $encoded;
+			return 1 if $callback and $callback->( split /:/, $auth );
 
 			# Verified
-			return $self->res->code(200) if $auth eq $encoded;
-
+			return 1 if $auth eq ($username||'') . ":$password";
+			
 			# Not verified
 			return $plugin->_password_prompt( $self, $realm );
 		}
 	);
-}
-
-sub _supplied_auth {
-	my $self = shift;
-	
-	return split /:/, Mojo::ByteStream->new( shift )->
-		b64_decode->
-		to_string;
 }
 
 sub _expected_auth {
@@ -85,71 +68,42 @@ Mojolicious::Plugin::BasicAuth - Basic HTTP Auth Helper
 
 L<Mojolicous::Plugin::BasicAuth> is a helper for basic http authentication.
 
+B<Note>
+This version (0.03) is for Mojolicious versions 0.999930 and above; please use version 0.02 with older versions of Mojolicious.
+
 =head1 USAGE
-		
-=head2 Simple - Mojolicious
 
-	# Mojolicious
-	package MyApp;
-	
-	sub startup {
-		 my $self = shift;
-		 $self->plugin('basic_auth');
-		 ...
-	}
-    
-	package MyApp::Controller;
-	 
-	sub index {
-		my $self = shift;
-		return unless $self->helper( basic_auth => realm => username => 'password' );
-		
-		$self->render_text( 'authenticated' );
-	}
+=head2 Callback
 
-=head2 Simple - Mojolicious::Lite
+	use Mojolicious::Lite;
 
-	plugin 'basic_auth'
-	
-	get '/' => sub {
-		my $self = shift;
-		return unless $self->helper( basic_auth => realm => username => 'password' );
-		
-		# Username is optional:
-		# $self->helper( basic_auth => realm => 'password' );
-		
-		$self->render_text( 'authenticated' );
-	}
-
-=head2 Simple - Hashref configuration
-
-	# or, for more wordy configuration:
-	get '/' => sub {
-		my $self = shift;
-		
-		return unless
-			$self->helper( basic_auth => {
-				realm => 'realm',
-				username => 'username',
-				password => 'password'
-			} );
-		
-		$self->render_text( 'authenticated' );
-	}
-
-=head2 Advanced - Callback
+	plugin 'basic_auth';
 
 	get '/' => sub {
 		my $self = shift;
 
-		return unless $self->helper( basic_auth => realm => sub {
-			my ($username, $password) = @_;
-			return 1 if $username eq 'username' and $password eq 'password';
-		} );
+		my $callback = sub {
+			return 1
+				if $_[0] eq 'username'
+				and $_[1] eq 'password';
+		};
 
-		$self->render_text( 'authenticated' );
+		$self->render_text('denied') 
+			if ! $self->basic_auth( realm => $callback );
+
+		$self->render_text('ok!');
 	};
 
+	app->start;
+
+=head2 Alternate usage
+
+		$self->render_text('denied')
+			unless $self->basic_auth( realm => user => 'pass' );
+		
+		# Username is optional:
+		# $self->basic_auth( realm => 'password' );
+		
 =head1 METHODS
 
 L<Mojolicious::Plugin::BasicAuth> inherits all methods from
@@ -171,7 +125,7 @@ L<http://github.com/tempire/mojolicious-plugin-basicauth>
 
 =head1 VERSION
 
-0.02
+0.03
 
 =head1 AUTHOR
 

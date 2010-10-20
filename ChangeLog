@@ -1,7 +1,0 @@
-This file documents the revision history for Mojolicious::Plugin::BasicAuth
-
-0.02 2010-04-04
-	- Improved pod docs
-
-0.01 2010-04-01
-	- Initial release
