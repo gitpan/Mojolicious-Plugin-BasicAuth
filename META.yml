@@ -2,11 +2,7 @@
 abstract: 'Basic HTTP Auth Helper'
 author:
   - 'Glen Hinkle <tempire@cpan.org>'
-build_requires:
-  Mojo::IOLoop: 0
-  Mojolicious::Lite: 0
-  Test::Mojo: 0
-  Test::More: 0
+build_requires: {}
 configure_requires:
   ExtUtils::MakeMaker: 6.31
 dynamic_config: 0
@@ -17,6 +13,5 @@ meta-spec:
   version: 1.4
 name: Mojolicious-Plugin-BasicAuth
 requires:
-  Mojo::ByteStream: 0
-  Mojolicious::Plugin: 0
-version: 0.03
+  Mojolicious: 0.999930
+version: 0.031
