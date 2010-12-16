@@ -13,5 +13,5 @@ meta-spec:
   version: 1.4
 name: Mojolicious-Plugin-BasicAuth
 requires:
-  Mojolicious: 0.999930
-version: 0.031
+  Mojolicious: 0.999950
+version: 0.032
