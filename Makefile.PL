@@ -20,9 +20,9 @@ my %WriteMakefileArgs = (
   'LICENSE' => 'perl',
   'NAME' => 'Mojolicious::Plugin::BasicAuth',
   'PREREQ_PM' => {
-    'Mojolicious' => '0.999950'
+    'Mojolicious' => '1.02'
   },
-  'VERSION' => '0.033',
+  'VERSION' => '0.04',
   'test' => {
     'TESTS' => 't/*.t'
   }
