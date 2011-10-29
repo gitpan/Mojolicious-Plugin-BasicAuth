@@ -9,22 +9,22 @@ use ExtUtils::MakeMaker 6.30;
 
 
 my %WriteMakefileArgs = (
-  'ABSTRACT' => 'Basic HTTP Auth Helper',
-  'AUTHOR' => 'Glen Hinkle <tempire@cpan.org>',
-  'BUILD_REQUIRES' => {},
-  'CONFIGURE_REQUIRES' => {
-    'ExtUtils::MakeMaker' => '6.30'
+  "ABSTRACT" => "Basic HTTP Auth Helper",
+  "AUTHOR" => "Glen Hinkle",
+  "BUILD_REQUIRES" => {},
+  "CONFIGURE_REQUIRES" => {
+    "ExtUtils::MakeMaker" => "6.30"
   },
-  'DISTNAME' => 'Mojolicious-Plugin-BasicAuth',
-  'EXE_FILES' => [],
-  'LICENSE' => 'perl',
-  'NAME' => 'Mojolicious::Plugin::BasicAuth',
-  'PREREQ_PM' => {
-    'Mojolicious' => '1.4'
+  "DISTNAME" => "Mojolicious-Plugin-BasicAuth",
+  "EXE_FILES" => [],
+  "LICENSE" => "perl",
+  "NAME" => "Mojolicious::Plugin::BasicAuth",
+  "PREREQ_PM" => {
+    "Mojolicious" => "1.4"
   },
-  'VERSION' => '0.05',
-  'test' => {
-    'TESTS' => 't/*.t'
+  "VERSION" => "0.06",
+  "test" => {
+    "TESTS" => "t/*.t"
   }
 );
 

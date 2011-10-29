@@ -4,7 +4,7 @@ use strict;
 use warnings;
 use Mojo::ByteStream;
 
-our $VERSION = '0.05';
+our $VERSION = '0.06';
 
 use base 'Mojolicious::Plugin';
 
@@ -28,7 +28,7 @@ sub register {
               if !$auth and !$callback;
 
             # Verification within callback
-            return 1 if $callback and $callback->(split /:/, $auth);
+            return 1 if $callback and $callback->(split /:/, $auth, 2);
 
             # Verified with realm => username => password syntax
             return 1 if $auth eq ($username || '') . ":$password";
@@ -108,17 +108,13 @@ L<http://github.com/tempire/mojolicious-plugin-basicauth>
 
 =head1 VERSION
 
-0.05
+0.06
 
 =head1 CREDITS
 
 =over 4
 
-=item Sebastian Riedel (sri) for L<Mojolicious>
-
-=item Viacheslav Tykhanovskyi (vti) for spreading the love over IRC
-
-=item Both of the above for making #mojo a much less abrasive place than #catalyst
+=item Kirill Miazine
 
 =back
 
