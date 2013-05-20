@@ -4,7 +4,7 @@ use strict;
 use warnings;
 use Mojo::ByteStream;
 
-our $VERSION = '0.06';
+our $VERSION = '0.07';
 
 use base 'Mojolicious::Plugin';
 
@@ -108,13 +108,15 @@ L<http://github.com/tempire/mojolicious-plugin-basicauth>
 
 =head1 VERSION
 
-0.06
+0.07
 
 =head1 CREDITS
 
 =over 4
 
 =item Kirill Miazine
+
+=item reneeb
 
 =back
 

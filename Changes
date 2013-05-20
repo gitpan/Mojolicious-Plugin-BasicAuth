@@ -1,3 +1,6 @@
+0.07  2013-05-20
+    - render_text -> render(text) for Mojolicious 4.0 (reneeb)
+
 0.06  2011-10-29
     - Allow : in passwords (Kirill Miazine)
 
